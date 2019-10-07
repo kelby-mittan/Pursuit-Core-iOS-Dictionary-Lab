@@ -11,24 +11,30 @@ var applesDict: [String: Int] = ["Adam": 3,
                                  "Eve": 4]
 
 // a. Set eveAppleCount equal to the number of apples that Eve has
+// ANSWER
+//let eveAppleCount = applesDict["Eve"]
 
-let eveAppleCount: Int = /*Your code here */ -1
-//assert(eveAppleCount == 4, "Was expecting 4, but got \(eveAppleCount)")
+let eveAppleCount: Int = applesDict["Eve"] ?? -1
+assert(eveAppleCount == 4, "Was expecting 4, but got \(eveAppleCount)")
 
 // b. Change the number of apples that Adam  has to 4
 
-// Your code here
-//assert(applesDict["Adam"] == 4, "Was expecting 4, but got \(String(describing: applesDict["Adam"]))")
+applesDict["Adam"] = 4
+assert(applesDict["Adam"] == 4, "Was expecting 4, but got \(String(describing: applesDict["Adam"]))")
 
 // c. Set calAndDanAppleCount equal to the sum of both of those
+let calApples = applesDict["Cal"]
+let danApples = applesDict["Dan"]
 
-let calAndDanAppleCount = /*Your code here */ -1
-//assert(calAndDanAppleCount == 8, "Was expecting 8, but got \(calAndDanAppleCount)")
+let calAndDanAppleCount = calApples! + danApples!
+assert(calAndDanAppleCount == 8, "Was expecting 8, but got \(calAndDanAppleCount)")
 
 // d. Set all the values in applesDict to 0
 
-// Your code here
-
+for (person, _) in applesDict {
+    applesDict[person] = 0
+}
+print(applesDict)
 //for (_, value) in applesDict {
 //    assert(value == 0, "Was expecting 0, but got \(value)")
 //}
@@ -41,20 +47,19 @@ var citiesDict: [String: String] = ["Afghanistan": "Kabul",
 
 // a. Set russiaCapital equal to Russia's capital using citiesDict
 
-let russiaCapital = /* Your code here */ ""
-//assert(russiaCapital == "Moscow", "Was expecting Moscow, but got \(russiaCapital)")
+let russiaCapital = citiesDict["Russia"]
+//assert(russiaCapital == "Moscow", "Was expecting Moscow, but got \(String(describing: russiaCapital))")
     
 // b. Add a new key value pair "Jamaica" and its capital "Kingston"
-
-// Your code here
+citiesDict["Jamaica"] = "Kingston"
 
 //assert(citiesDict["Jamaica"] == "Kingston", "Was expecting Kingston, but got \(String(describing: citiesDict["Jamaica"]))")
 
 // c. Add a new key value pair "Indonesia" and its capital "Jakarta"
 
-// Your code here
-
+citiesDict["Indonesia"] = "Jakarta"
 //assert(citiesDict["Indonesia"] == "Jakarta", "Was expecting Jakarta, but got \(String(describing: citiesDict["Indonesia"]))")
+
 
 // Question 3
 
@@ -71,7 +76,11 @@ let russiaCapital = /* Your code here */ ""
 */
 
 var authorScores = [String: Double] ()
-
+authorScores = ["Mark Twain": 8.9,
+                "Nathaniel Hawthorne": 5.1,
+                "John Steinbeck": 2.3,
+                "C.S. Lewis": 9.9,
+                "Jon Krakauer": 6.1 ]
 // Your code here
 
 //assert(authorScores["Mark Twain"] == 8.9, "Was expecting 8.9, but got \(String(describing: authorScores["Mark Twain"]))")
@@ -83,6 +92,8 @@ var authorScores = [String: Double] ()
 
 
 // b. Add an additional author named “Erik Larson” with an assigned score of 9.2.
+
+authorScores["Erik Larson"] = 9.2
 
 //assert(authorScores["Erik Larson"] == 9.2, "Was expecting 9.2, but got \(authorScores["Erik Larson"])")
 
@@ -99,7 +110,7 @@ var peopleWithScores: [[String: String]] = [
     ],
     [
         "firstName": "Garry",
-        "lastName": "Mckenzie",
+        "lastName": "McKenzie",
         "score": "23"
     ],
     [
@@ -118,12 +129,25 @@ var peopleWithScores: [[String: String]] = [
         "score": "16"
     ]
 ]
-
 var highestScoringName = ""
+var highestScore = 0
 
-// Your code here
+for dict in peopleWithScores {
+    
+    if let score = dict["score"] {
+        let score = Int(score)
+        if score ?? -1 > highestScore {
+            highestScore = score ?? -1
+            let firstName = dict["firstName"] ?? "unknown"
+            let lastName = dict["lastName"] ?? "unknown"
+            highestScoringName = "\(firstName) \(lastName)"
+            print(highestScoringName)
+        }
+    }
+}
+print(highestScoringName)
 
-//assert(highestScoringName == "Garry McKenzie", "Was expecting Garry McKenzie, but got \(highestScoringName)")
+assert(highestScoringName == "Garry McKenzie", "Was expecting Garry McKenzie, but got \(highestScoringName)")
 
 // Question Five
 
@@ -132,14 +156,16 @@ var highestScoringName = ""
 
 var cubeDict: [Int: Int] = [:]
 
-// Your code here
+for num in 1...20 {
+    cubeDict[num] = num * num * num
+}
 
-//assert(cubeDict.count == 20, "Was expecting 20, but got \(cubeDict.count)")
-//assert(cubeDict[1] == 1, "Was expecting 1, but got \(String(describing: cubeDict[1]))")
-//assert(cubeDict[2] == 8, "Was expecting 8, but got \(String(describing: cubeDict[2]))")
-//assert(cubeDict[3] == 27, "Was expecting 27, but got \(String(describing: cubeDict[3]))")
-//assert(cubeDict[14] == 2744, "Was expecting 2744, but got \(String(describing: cubeDict[14]))")
-//assert(cubeDict[20] == 8000, "Was expecting 8000, but got \(String(describing: cubeDict[20]))")
+assert(cubeDict.count == 20, "Was expecting 20, but got \(cubeDict.count)")
+assert(cubeDict[1] == 1, "Was expecting 1, but got \(String(describing: cubeDict[1]))")
+assert(cubeDict[2] == 8, "Was expecting 8, but got \(String(describing: cubeDict[2]))")
+assert(cubeDict[3] == 27, "Was expecting 27, but got \(String(describing: cubeDict[3]))")
+assert(cubeDict[14] == 2744, "Was expecting 2744, but got \(String(describing: cubeDict[14]))")
+assert(cubeDict[20] == 8000, "Was expecting 8000, but got \(String(describing: cubeDict[20]))")
 
 
 // Question Six
@@ -149,9 +175,26 @@ var cubeDict: [Int: Int] = [:]
  var myString = "We're flooding people with information. We need to feed it through a processor. A human must turn information into intelligence or knowledge. We've tended to forget that no computer will ever ask a new question."
 
 var frequencyDict: [Character: Int] = [:]
+var mostFrequentChar: Character = "?"
+var counter = 0
 
-// Your code here
+for letter in myString {
+    if frequencyDict[letter] != nil {
+        frequencyDict[letter]! += 1
+    } else {
+        frequencyDict[letter] = 1
+    }
+}
 
-let mostFrequentChar: Character = "?"
+for (char, occurrence) in frequencyDict {
+    if occurrence > counter && char != " " && !char.isUppercase {
+        counter = occurrence
+        mostFrequentChar = char
+    }
+}
 
-//assert(mostFrequentChar == "e", "Was expecting e, but got \(mostFrequentChar)")
+//print(mostFrequentChar)
+
+
+
+assert(mostFrequentChar == "e", "Was expecting e, but got \(mostFrequentChar)")
